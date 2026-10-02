@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Server action: reads the torwal_support.url system parameter at
+        click-time and redirects the user to it (falls back to the Torwal
+        support page if the parameter was ever removed).
+    -->
+    <record id="action_open_torwal_support" model="ir.actions.server">
+        <field name="name">Torwal Support</field>
+        <field name="type">ir.actions.server</field>
+        <field name="state">code</field>
+        <field name="model_id" ref="base.model_ir_config_parameter"/>
+        <field name="code">
+url = env['ir.config_parameter'].sudo().get_param(
+    'torwal_support.url', 'https://www.torwal.com/support'
+)
+action = {
+    'type': 'ir.actions.act_url',
+    'url': url,
+    'target': 'self',
+}
+        </field>
+    </record>
+
+    <!--
+        Top-level (application) menu so it shows up as a tile in the Apps
+        drawer. Clicking it triggers the server action above.
+    -->
+    <menuitem id="menu_torwal_support_root"
+              name="Torwal Support"
+              sequence="999"
+              web_icon="torwal_support,static/description/icon.png"
+              action="action_open_torwal_support"/>
+</odoo>
+

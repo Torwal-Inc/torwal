@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Default value for the support URL. Admins can change this at any
+        time via Settings > Technical > Parameters > System Parameters
+        (key: torwal_support.url) without needing to touch the code.
+        noupdate="1" so the value is not reset to the default on module
+        upgrade once it has been customized.
+    -->
+    <data noupdate="1">
+        <record id="torwal_support_url_param" model="ir.config_parameter">
+            <field name="key">torwal_support.url</field>
+            <field name="value">https://hub.torwal.com/support</field>
+        </record>
+    </data>
+</odoo>
+
